@@ -53,3 +53,32 @@ html {
     padding: 0 24px;
     display: block;
 }
+
+#header .login {
+    float: right;
+    margin-top: 13px;
+    padding-right: 10px;
+}
+
+#header .btn-login {
+    color: red;
+    font-size: 15px;
+}
+
+#header .btn-login:hover {
+    background-color: blue;
+    cursor: pointer;
+}
+
+#header .search-icon {
+    color: #fff;
+    font-size: 20px;
+    line-height: 46px;
+    padding: 0 20px;
+
+}
+
+#header .search-icon:hover {
+    background-color: #f44336;
+    cursor: pointer;
+}
