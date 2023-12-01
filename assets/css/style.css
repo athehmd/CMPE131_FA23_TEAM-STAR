@@ -22,7 +22,7 @@ html {
 
 #header {
     height: 46px;
-    background-color: #000;
+    background-color: #94c4e7;
     position: fixed;
     top: 0;
     left: 0;
@@ -43,7 +43,7 @@ html {
 }
 
 #nav > li > a {
-    color: #fff;
+    color: #333;
     text-transform: uppercase;
 }
 
@@ -81,4 +81,12 @@ html {
 #header .search-icon:hover {
     background-color: #f44336;
     cursor: pointer;
+}
+
+.news-input {
+    width: 100px;
+    height: 100%;
+    border-radius: 1px;
+    border: 2px solid #929191; 
+    margin-top: 5px;
 }
