@@ -1,92 +1,207 @@
-/* Reset CSS */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@500&display=swap");
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-html {
-    font-family: Arial, Helvetica, sans-serif;
+/* General */
+:root {
+    --primary-text-color: #183b56;
+    --secondary-text-color: #577592;
+    --accent-color: #2294ed;
+    --accent-color-dark: #1d69a3;
 }
-/*
-1. Position
-2. Size
-3. Color
-4. Font 
-*/
+
+.row {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.row::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.col {
+    float: left;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.col-half {
+    width: 50%;
+}
+
+.col-full {
+    width: 100%;
+}
 
 /* Main */
-#main {
-    
+body {
+    font-family: "Poppins", sans-serif;
+    color: var(--primary-text-color);
 }
 
-#header {
-    height: 46px;
-    background-color: #94c4e7;
+p {
+    font-family: "Roboto", sans-serif;
+    color: var(--secondary-text-color);
+    line-height: 1.4rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    max-width: 1180px;
+    margin-inline: auto;
+    overflow: hidden;
+}
+
+nav {
+    background-color: #f3faff;
+    box-shadow: 0 0 4px #bbd0e2;
     position: fixed;
     top: 0;
+    z-index: 99;
     left: 0;
     right: 0;
-    z-index: 1;
 }
 
-#nav {
-    display: inline-block;
+.main-nav {
+    justify-content: space-between;
+    padding-block: 8px;
 }
 
-#nav > li {
-    display: inline-block;
+.company-logo img {
+    width: 120px;
 }
 
-#nav li {
-    position: relative;
+.nav-links ul {
+    gap: 16px;
 }
 
-#nav > li > a {
-    color: #333;
-    text-transform: uppercase;
+.hover-link {
+    cursor: pointer;
 }
 
-#nav li a {
-    text-decoration: none;
-    line-height: 46px;
-    padding: 0 24px;
-    display: block;
+.hover-link:hover {
+    color: var(--secondary-text-color);
 }
 
-#header .login {
-    float: right;
-    margin-top: 13px;
-    padding-right: 10px;
-}
-
-#header .btn-login {
+.hover-link:active {
     color: red;
-    font-size: 15px;
 }
 
-#header .btn-login:hover {
-    background-color: blue;
-    cursor: pointer;
+.nav-item.active {
+    color: var(--accent-color);
 }
 
-#header .search-icon {
-    color: #fff;
-    font-size: 20px;
-    line-height: 46px;
-    padding: 0 20px;
-
-}
-
-#header .search-icon:hover {
-    background-color: #f44336;
-    cursor: pointer;
+.search-bar {
+    height: 32px;
+    gap: 8px;
 }
 
 .news-input {
-    width: 100px;
+    width: 200px;
     height: 100%;
-    border-radius: 1px;
-    border: 2px solid #929191; 
-    margin-top: 5px;
+    padding-inline: 12px;
+    border-radius: 4px;
+    border: 2px solid #bbd0e2;
+    font-family: "Roboto", sans-serif;
+}
+
+.search-button {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+}
+
+.search-button:hover {
+    background-color: var(--accent-color-dark);
+}
+
+main {
+    padding-block: 20px;
+    margin-top: 80px;
+}
+
+.cards-container {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    align-items: start;
+}
+
+.card {
+    width: 360px;
+    min-height: 400px;
+    box-shadow: 0 0 4px #d4ecff;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 1px 1px 8px #d4ecff;
+    background-color: #f9fdff;
+    transform: translateY(-2px);
+}
+
+.card-header img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 12px;
+}
+
+.news-source {
+    margin-block: 12px;
+}
+
+/* Contact */
+.contact-content {
+    margin-top: 48px;
+}
+
+.contact-info {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.contact-info i[class*="ti-"] {
+    width: 30px;
+    display: inline-block;
+}
+
+.contact-form {
+    font-size: 15px;
+}
+
+.contact-form .form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    outline: none;
 }
