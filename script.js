@@ -1,5 +1,5 @@
-const API_KEY = "1d3a0eefa97b499d8fbc4ee93eeb40b7";
-const url = "";
+// const API_KEY = "1d3a0eefa97b499d8fbc4ee93eeb40b7";
+// const url = "https://newsapi.org/v2/everything?q=";
 
 window.addEventListener("load", () => fetchNews("India"));
 
@@ -38,7 +38,7 @@ function fillDataInCard(cardClone, article) {
     newsDesc.innerHTML = article.description;
 
     const date = new Date(article.publishedAt).toLocaleString("en-US", {
-        timeZone: "Asia/Jakarta",
+        timeZone: "US/Los Angeles",
     });
 
     newsSource.innerHTML = `${article.source.name} · ${date}`;
