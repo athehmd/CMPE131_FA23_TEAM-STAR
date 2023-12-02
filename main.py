@@ -149,11 +149,13 @@ def City_Of_Williamston():
         elif c == '2':
             click.echo("Logging you in.")
             status = login()
-            click.echo("Successfully logged in.")
-            action = user_actions()
             
-            while action != FAILURE:
+            if status == SUCCESS:
+                click.echo("Successfully logged in.")
                 action = user_actions()
+            
+                while action != FAILURE:
+                    action = user_actions()
         
         elif c == '3':
             click.echo("Bye!")
