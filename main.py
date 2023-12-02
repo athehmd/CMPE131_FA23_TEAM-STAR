@@ -101,6 +101,31 @@ def login() -> int:
 
         return FAILURE
     
+def user_actions() -> int:
+    prompt = '''
+        Here's what you can do:
+        [1] function name here
+        [2] function name here
+        [3] function name here
+        [4] function name here
+        [5] Exit
+    '''
+
+    click.echo(prompt)
+
+    c = click.getchar()
+
+    if c == '1':
+        print('function call here')
+    elif c == '2':
+        print('function call here')
+    elif c == '3':
+        print('function call here')
+    elif c == '4':
+        print('function call here')
+    else:
+        return FAILURE
+    
 def City_Of_Williamston():
     while True:
         
@@ -118,10 +143,17 @@ def City_Of_Williamston():
         if c == '1':
             click.echo("Signing you up.")
             status = signup()
-        
+            click.echo("Successfully signed up.")
+            c = 2
+            
         elif c == '2':
             click.echo("Logging you in.")
             status = login()
+            click.echo("Successfully logged in.")
+            action = user_actions()
+            
+            while action != FAILURE:
+                action = user_actions()
         
         elif c == '3':
             click.echo("Bye!")
