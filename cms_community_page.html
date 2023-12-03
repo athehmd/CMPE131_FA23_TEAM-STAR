@@ -1,0 +1,100 @@
+<head>
+  <title>CMS Community Page</title>
+</head>
+
+<body>
+  <div id="contentContainer"></div>
+</body>
+
+<script>
+  const serverUrl = 'http://127.0.0.1:5000'; // replace with your server url
+  const contentContainer = document.getElementById('contentContainer');
+
+  // retrieve text data from database
+  const getText_Endpoint = serverUrl + '/get_community_page_text';
+  fetch(getText_Endpoint)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data && data.data && Array.isArray(data.data) && data.data.length > 0) {
+        // Loop through the retrieved data
+        data.data.forEach(entry => {
+          const elementType = entry[1]; // Assuming 'size' is in the second position
+          const elementId = entry[0]; // Assuming 'id' is in the first position
+          var content = entry[2]; // Assuming 'content' is in the third position
+
+          // Create element
+          const element = document.createElement(elementType);
+          element.textContent = content;
+
+          // Add click event listener to make paragraph editable
+          element.addEventListener('click', () => {
+            const editableElement = document.createElement('textarea');
+            editableElement.value = content;
+
+            const container = document.createElement('div');
+            const saveButton = document.createElement('button');
+            element.replaceWith(container);
+            container.appendChild(editableElement);
+            container.appendChild(saveButton);
+
+
+            saveButton.textContent = 'Save';
+            saveButton.addEventListener('click', () => {
+              content = editableElement.value;
+              const updatedContent = editableElement.value;
+
+              // Update the UI with the new content
+              element.textContent = updatedContent;
+              container.replaceWith(element);
+
+              // Save the changes to the database using fetch or another method
+              saveChangesToDB(elementId, updatedContent, saveButton);
+            });
+
+            //contentContainer.appendChild(saveButton);
+
+          });
+
+          // Append the element to the content container
+          contentContainer.appendChild(element);
+        });
+      } else {
+        console.error('No valid data found in the response');
+      }
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+
+  //save edits to database
+  function saveChangesToDB(number, updatedContent, saveButton) {
+
+    const saveText_Endpoint = serverUrl + '/edit_community_page_text';
+    fetch(saveText_Endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        number: number,
+        content: updatedContent,
+      }),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        console.log('Changes saved successfully');
+        //saveButton.remove();
+      })
+      .catch(error => {
+        console.error('Error while saving changes:', error);
+      });
+  }
+
+</script>
