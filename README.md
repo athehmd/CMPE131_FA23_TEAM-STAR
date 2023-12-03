@@ -58,7 +58,7 @@ python3 main.py
 
 
 
-adfsdaf                  
+                  
 
 To run flask_server.py locally (which we do for now for testing), we need CORS to give permission for websites to access our local files.
 In your command line, run
