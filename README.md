@@ -53,3 +53,15 @@ To use the application:
 ```
 python3 main.py
 ```
+
+
+To run flask_server.py locally (which we do for now for testing), we need CORS to give permission for websites to access our local files.
+In your command line, run
+```
+pip install Flask-CORS
+```
+Then, to start the server, go to the correct directory and run
+```
+python flask_server.py
+```
+to start the server. Make sure that db.py is in the same folder as flask_server.py.
