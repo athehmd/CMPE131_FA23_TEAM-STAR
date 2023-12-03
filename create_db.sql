@@ -10,7 +10,6 @@ create table cmsCommunityPage (
   size varchar(10) not null,
   content text
   );
-
 insert into cmsCommunityPage (size,content)
 values ('h1','Sample Title'),
 ('h3','Sample Heading'),
