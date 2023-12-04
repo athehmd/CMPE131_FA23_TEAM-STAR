@@ -56,7 +56,7 @@ python3 main.py
 .  
 .  
 .  
-To run the flask server flask_server.py locally (which we do for now for testing), we need CORS to give permission for websites to access our local files.
+To run the flask server flask_server.py locally (which we do for now for testing), we need CORS to give permission for websites to access our local server.
 In your command line, run
 ```
 pip install Flask-CORS
