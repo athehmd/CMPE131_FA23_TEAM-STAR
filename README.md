@@ -77,7 +77,7 @@ Press CTRL+C to quit
  * Debugger PIN: 134-633-872
 ```
 .  
-Also Make sure that db.py is in the same folder as flask_server.py. 
+Also Make sure that db.py is in the same folder as flask_server.py.  
 .  
 Then when using the cms community page with it make sure to change the variable serverUrl in cms_community_page.html's embedded javascript to the url of the flask server you just started. it should say the url in the command line as a response to you writing "python flask_server.py". only with the server actively running can the cms community page function.  
 .  
