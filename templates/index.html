@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/font/themify-icons/themify-icons.css">
+</head>
+<body>
+    <nav>
+        <div class="main-nav container flex">
+            <a href="#" onclick="reload()" class="company-logo">
+                <img src="./assets/img/logo.png" alt="company logo">
+            </a>
+            <div class="nav-links">
+                <ul class="flex">
+                    <li class="hover-link nav-item" id="home" onclick="onNavItemClick('home')">Home</li>
+                    <li class="hover-link nav-item" id="news" onclick="onNavItemClick('news')">Hot News</li>
+                    <li class="hover-link nav-item" id="videos" onclick="onNavItemClick('videos')">Videos</li>
+                    <li class="hover-link nav-item" id="contact" onclick="onNavItemClick('contact')">Contact</li>
+                </ul>
+            </div>
+            <div class="search-bar flex">
+                <input id="search-text" type="text" class="news-input" placeholder="e.g. Sport">
+                <button id="search-button" class="search-button">Search</button>
+            </div>
+
+            <div>
+                <button id="login-button" class="login-button">Login</button>
+            </div>
+        </div>
+    </nav>
+    
+
+    <main>
+        <div class="cards-container container flex" id="cards-container">
+            
+        </div>
+    </main>
+
+    <template id="template-news-card">
+        <div class="card">
+            <div class="card-header">
+                <img src="https://via.placeholder.com/400x200" alt="news-image" id="news-img">
+            </div>
+            <div class="card-content">
+                <h3 id="news-title">This is the Title</h3>
+                <h6 class="news-source" id="news-source">End Gadget 26/08/2023</h6>
+                <p class="news-desc" id="news-desc">Say Hello!</p>
+            </div>
+        </div>
+    </template>
+
+     <!-- Hot News-->
+    <div class="tour-section">
+        <div class="content-section">
+            <h2 class="section-heading text-white">HOT NEWS</h2>
+            <p class="section-sub-heading text-white">Last updated 11/30/2023</p>
+
+            <!-- News -->
+            <div class="row places-list">
+                <div class="col col-third">
+                <img src="./assets/img/newyork.jpg" alt="New York" class="place-img">
+                    <div class="place-body">
+                        <h3 class="place-heading">New York</h3>
+                        <p class="place-time">Fri 27 Nov 2023</p>
+                        <p class="place-desc">Say Hello.</p>
+                        <button class="btn js-read-more">Read More...</button>
+                    </div>
+                </div>
+
+                <div class="col col-third">
+                    <img src="./assets/img/paris.jpg" alt="New York" class="place-img">
+                    <div class="place-body">
+                        <h3 class="place-heading">Paris</h3>
+                        <p class="place-time">Sat 28 Nov 2023</p>
+                        <p class="place-desc">Say Hello.</p>
+                        <button class="btn js-read-more">Read More...</button>
+                    </div>
+                </div>
+
+                <div class="col col-third">
+                    <img src="./assets/img/sanfran.jpg" alt="New York" class="place-img">
+                    <div class="place-body">
+                        <h3 class="place-heading">San Francisco</h3>
+                        <p class="place-time">Sun 29 Nov 2023</p>
+                        <p class="place-desc">Say Hello.</p>
+                        <button class="btn js-read-more">Read More...</button>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Contact Page -->
+    <div class="content-section">
+        <h2 class="section-heading">CONTACT</h2>
+        <p class="section-sub-heading">Contact us!!!</p>
+
+        <div class="row contact-content">
+            <div class="col col-half contact-info">
+                <p><i class="ti-location-pin"></i>San Jose</p>
+                <p><i class="ti-mobile"></i>Phone:+00 123 456 789</p>
+                <p><i class="ti-email"></i>Email: teamstar_cpme131@gmail.com</p>
+            </div>
+            <div class="col col-half contact-form">
+                <form action="">
+                    <div class="row">
+                        <div class="col col-half">
+                            <input type="text" name="" placeholder="Name" required="" class="form-control">
+                        </div>
+
+                        <div class="col col-half">
+                            <input type="email" name="" placeholder="Email" required="" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row mt-8">
+                        <div class="col col-full">
+                            <input type="text" name="" placeholder="Message" required="" class="form-control">
+                        </div>
+                    </div>
+
+                    <input class="btn pull-right  mt-16" type="submit" value="Send">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
