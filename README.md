@@ -65,8 +65,20 @@ Then, to start the server, go to the correct directory in the command line and r
 ```
 python flask_server.py
 ```
-to start the server. Make sure that db.py is in the same folder as flask_server.py.  
+to start the server. If it was started successfully it should respond with something like this  
+```
+* Serving Flask app 'flask_server'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 134-633-872
+```
 .  
-Then when using the cms community page with it make sure to change the variable serverUrl in cms_community_page.html's embedded javascript to the url of the flask server you just started. it should say the url in the command line as a response to you writing "python flask_server.py".  
+Also Make sure that db.py is in the same folder as flask_server.py. 
+.  
+Then when using the cms community page with it make sure to change the variable serverUrl in cms_community_page.html's embedded javascript to the url of the flask server you just started. it should say the url in the command line as a response to you writing "python flask_server.py". only with the server actively running can the cms community page function.  
 .  
 Also make sure you have the database installed, with the cmsCommunityPage table, and you connected up with the database in your db.py file with the correct password as shown above.
