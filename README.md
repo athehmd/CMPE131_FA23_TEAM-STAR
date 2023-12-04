@@ -56,7 +56,7 @@ python3 main.py
 .  
 .  
 .  
-To run the backend, we do it locally now for testing. We run the flask server flask_server.py locally. Since it is local, however, we need CORS to give permission so that websites can access our local server.
+To run the backend, we do it locally now for testing, so we run the flask server flask_server.py locally. Since it is local, however, we need CORS to give permission so that websites can access our local server.
 In the command line, run
 ```
 pip install Flask-CORS
