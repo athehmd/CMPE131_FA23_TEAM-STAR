@@ -61,7 +61,7 @@ In the command line, run
 ```
 pip install Flask-CORS
 ```
-Then, to start the server, go to the correct directory in the command line and run
+Then, to start the server, after having downloaded flask_server.py, go to the correct directory in the command line and run
 ```
 python flask_server.py
 ```
