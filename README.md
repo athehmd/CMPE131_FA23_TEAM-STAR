@@ -67,6 +67,6 @@ python flask_server.py
 ```
 to start the server. Make sure that db.py is in the same folder as flask_server.py.  
 .  
-Then when using the cms community page with it make sure to change the variable serverUrl in cms_community_page.html's embedded javascript to the url of the flask server you just started. it should say the url in the command line after you wrote "python flask_server.py".  
+Then when using the cms community page with it make sure to change the variable serverUrl in cms_community_page.html's embedded javascript to the url of the flask server you just started. it should say the url in the command line as a response to you writing "python flask_server.py".  
 .  
 Also make sure you have the database installed and you connected up with the database in your db.py file with the correct password as shown above.
