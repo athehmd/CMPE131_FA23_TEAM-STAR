@@ -1,21 +1,18 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>City of WIlliamston</title>
+    <title>CMS Community Page</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar__container">
-            <a href="/" id="navbar__logo" >
-                <img src="{{ url_for('static', filename='images/image2vector.svg') }}" alt="pic" id="main__img" style="max-width: 8%; height: auto;">
-                City Of Williamston
-            </a>
+            <a href="/" id="navbar__logo" > <img src="{{ url_for('static', filename='images/image2vector.svg') }}" alt="pic" id="main__img" style="max-width: 8%; height: auto;">
+                City Of Williamston </a>
             <div class="navbar__toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -23,10 +20,11 @@
             </div>
             <ul class="navbar__menu">
                 <li class="navbar__item">
-                    <a href="/" class="navbar__links"> Home </a>
+                    <a href="{{ url_for('index') }}" class="navbar__links"> Home </a>
                 </li>
                 <li class="navbar__item">
                     <a href="{{ url_for('community') }}" class="navbar__links"> Community </a>
+                    
                 </li>
                 <li class="navbar__item">
                     <a href="{{ url_for('news') }}" class="navbar__links"> News </a>
@@ -38,85 +36,104 @@
         </div>
     </nav>
 
-    <div id="contentContainer"></div>
+    <!--CMS content-->
+    <h2>CMS Community Page &lpar;click on text to edit&rpar;</h2>
+    
+    <!--Where all the paragraphs and headings pulled from the database go-->
+  <div id="contentContainer"></div>
+</body>
 
-    <script>
-        const serverUrl = 'http://127.0.0.1:5000';
-        const contentContainer = document.getElementById('contentContainer');
+<!--CMS Connection with Backend-->
+<script>
+  // ***replace with your flask server url***
+  const serverUrl = 'http://127.0.0.1:8000';
+  const contentContainer = document.getElementById('contentContainer');
 
-        // Retrieve text data from the database
-        const getText_Endpoint = serverUrl + '/get_community_page_text';
-        fetch(getText_Endpoint)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data && data.data && Array.isArray(data.data) && data.data.length > 0) {
-                    // Loop through the retrieved data
-                    data.data.forEach(entry => {
-                        const elementType = 'textarea';
-                        const elementId = entry[0];
-                        const content = entry[2];
+  // retrieve text data from database
+  const getText_Endpoint = serverUrl + '/get_community_page_text';
+  fetch(getText_Endpoint)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data && data.data && Array.isArray(data.data) && data.data.length > 0) {
+        // Loop through the retrieved data
+        data.data.forEach(entry => {
+          const elementType = entry[1]; // Assuming 'size' is in the second position
+          const elementId = entry[0]; // Assuming 'id' is in the first position
+          var content = entry[2]; // Assuming 'content' is in the third position
 
-                        // Create a text area
-                        const textarea = document.createElement('textarea');
-                        textarea.value = content;
+          // Create element
+          const element = document.createElement(elementType);
+          element.textContent = content;
 
-                        // Create a Save button
-                        const saveButton = document.createElement('button');
-                        saveButton.textContent = 'Save';
+          // Add click event listener to make paragraph editable
+          element.addEventListener('click', () => {
+            const editableElement = document.createElement('textarea');
+            editableElement.value = content;
 
-                        // Add click event listener to save changes
-                        saveButton.addEventListener('click', () => {
-                            const updatedContent = textarea.value;
+            const container = document.createElement('div');
+            const saveButton = document.createElement('button');
+            element.replaceWith(container);
+            container.appendChild(editableElement);
+            container.appendChild(saveButton);
 
-                            // Save the changes to the database
-                            saveChangesToDB(elementId, updatedContent)
-                                .then(() => {
-                                    // Update the UI with the new content\
-                                    contentContainer.replaceChild(document.createTextNode(updatedContent), textarea);
-                                    contentContainer.removeChild(saveButton);
-                                })
-                                .catch(error => {
-                                    console.error('Error while saving changes:', error);
-                                });
-                        });
 
-                        // Append the text area and Save button to the content container
-                        contentContainer.appendChild(textarea);
-                        contentContainer.appendChild(saveButton);
-                    });
-                } else {
-                    console.error('No valid data found in the response');
-                }
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
+            saveButton.textContent = 'Save';
+            saveButton.addEventListener('click', () => {
+              content = editableElement.value;
+              const updatedContent = editableElement.value;
+
+              // Update the UI with the new content
+              element.textContent = updatedContent;
+              container.replaceWith(element);
+
+              // Save the changes to the database using fetch or another method
+              saveChangesToDB(elementId, updatedContent, saveButton);
             });
 
-        // Save edits to the database
-        function saveChangesToDB(number, updatedContent) {
-            const saveText_Endpoint = serverUrl + '/edit_community_page_text';
-            return fetch(saveText_Endpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    number: number,
-                    content: updatedContent,
-                }),
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    console.log('Changes saved successfully');
-                });
+            //contentContainer.appendChild(saveButton);
+
+          });
+
+          // Append the element to the content container
+          contentContainer.appendChild(element);
+        });
+      } else {
+        console.error('No valid data found in the response');
+      }
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+
+  //save edits to database
+  function saveChangesToDB(number, updatedContent, saveButton) {
+
+    const saveText_Endpoint = serverUrl + '/edit_community_page_text';
+    fetch(saveText_Endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        number: number,
+        content: updatedContent,
+      }),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-    </script>
-</body>
-</html>
+        console.log('Changes saved successfully');
+        //saveButton.remove();
+      })
+      .catch(error => {
+        console.error('Error while saving changes:', error);
+      });
+  }
+
+</script>
