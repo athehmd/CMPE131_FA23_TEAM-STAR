@@ -14,7 +14,7 @@ def edit_community_page_text():
     number = request.json.get('number')
     content = request.json.get('content')
 
-    if number is not None and content is not None:
+    if number is not None and content is not None:  
         # Update statement
         update_query = "UPDATE cmsCommunityPage SET content = %s WHERE number = %s"
 
@@ -33,6 +33,7 @@ def edit_community_page_text():
 def get_community_page_text():
     db = get_db()  # Use the function from database.py to connect to the database
     cursor = db.cursor()
+    
     try:
         cursor.execute("SELECT * FROM cmsCommunityPage")
         data = cursor.fetchall()

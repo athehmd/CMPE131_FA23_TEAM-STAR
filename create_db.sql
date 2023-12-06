@@ -14,3 +14,9 @@ insert into cmsCommunityPage (size,content)
 values ('h1','Sample Title'),
 ('h3','Sample Heading'),
 ('p','Sample Text');
+
+create table contactMessages (
+  name varchar(40) NOT NULL, 
+  email varchar(40) NOT NULL,
+  message varbinary(1024)
+);

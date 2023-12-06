@@ -29,8 +29,21 @@ EXIT = 2
 SUCCESS = 0
 serverUrl = 'http://127.0.0.1:5000'
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+        insert_message = "INSERT INTO contactMessages VALUES (%s, %s, %s)"
+        contactMessage = (name, email, message)
+        # execute and commit
+        cursor = conn.cursor()
+        logger.info("Insert new message into the database.")
+        cursor.execute(insert_message, contactMessage)
+        cursor.close()
+        conn.commit()
+        return redirect('/')
     return render_template('index.html')
 
 @app.route('/news')
