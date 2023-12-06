@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City of Williamston</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/" id="navbar__logo">
+                <img src="{{ url_for('static', filename='images/image2vector.svg') }}" alt="pic" id="main__img" style="max-width: 8%; height: auto;">
+                City Of Williamston
+            </a>
+            <div class="navbar__toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="/" class="navbar__links"> Home </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="{{ url_for('community') }}" class="navbar__links"> Community </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="{{ url_for('news') }}" class="navbar__links"> News </a>
+                </li>
+                <li class="navbar__btn">
+                    <a href="{{ url_for('login') }}" class="button"> Log In </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="contentContainer"></div>
+
+    <script>
+        const serverUrl = 'http://127.0.0.1:5000';
+        const contentContainer = document.getElementById('contentContainer');
+
+        // Retrieve text data from the database
+        const getText_Endpoint = serverUrl + '/get_community_page_text';
+        fetch(getText_Endpoint)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.data && Array.isArray(data.data) && data.data.length > 0) {
+                    // Loop through the retrieved data
+                    data.data.forEach(entry => {
+                        const elementType = 'textarea';
+                        const elementId = entry[0];
+                        const content = entry[2];
+
+                        // Create a container for each text area and Save button pair
+                        const container = document.createElement('div');
+
+                        // Create a text area
+                        const textarea = document.createElement('textarea');
+                        textarea.value = content;
+
+                        // Create a Save button
+                        const saveButton = document.createElement('button');
+                        saveButton.textContent = 'Save';
+
+                        // Add click event listener to save changes
+                        saveButton.addEventListener('click', () => {
+                            const updatedContent = textarea.value;
+
+                            // Save the changes to the database
+                            saveChangesToDB(elementId, updatedContent)
+                                .then(() => {
+                                    // Update the UI with the new content
+                                    contentContainer.removeChild(container);
+                                })
+                                .catch(error => {
+                                    console.error('Error while saving changes:', error);
+                                });
+                        });
+
+                        // Append the text area and Save button to the container
+                        container.appendChild(textarea);
+                        container.appendChild(saveButton);
+
+                        // Append the container to the content container
+                        contentContainer.appendChild(container);
+                    });
+                } else {
+                    console.error('No valid data found in the response');
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+        // Save edits to the database
+        function saveChangesToDB(number, updatedContent) {
+            const saveText_Endpoint = serverUrl + '/edit_community_page_text';
+            return fetch(saveText_Endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    number: number,
+                    content: updatedContent,
+                }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    console.log('Changes saved successfully');
+                });
+        }
+    </script>
+</body>
+</html>

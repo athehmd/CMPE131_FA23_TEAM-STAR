@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City of WIlliamston</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/" id="navbar__logo" > <img src="{{ url_for('static', filename='images/image2vector.svg') }}" alt="pic" id="main__img" style="max-width: 8%; height: auto;">
+                City Of Williamston </a>
+            <div class="navbar__toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="/" class="navbar__links"> Home </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="{{ url_for('community') }}" class="navbar__links"> Community </a>
+                    
+                </li>
+                <li class="navbar__item">
+                    <a href="{{ url_for('news') }}" class="navbar__links"> News </a>
+                </li>
+                <li class="navbar__btn">
+                    <a href="{{ url_for('login') }}" class="button"> Log In </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    
+    <div class="google-doc-links-container">
+        <h2>City of Williamston Official Documents</h2>
+        <div class="google-doc-link">
+            <a href="https://docs.google.com/document/d/1uZHi-6vlXHHKr2mCQiRFIEqM8_GepT_D2WYGYNzly1g/edit?usp=sharing" target="_blank">Form 1</a>
+        </div>
+        <div class="google-doc-link">
+            <a href="https://docs.google.com/document/d/1uZHi-6vlXHHKr2mCQiRFIEqM8_GepT_D2WYGYNzly1g/edit?usp=sharing" target="_blank">Form 2</a>
+        </div>
+        <div class="google-doc-link">
+            <a href="https://docs.google.com/document/d/1uZHi-6vlXHHKr2mCQiRFIEqM8_GepT_D2WYGYNzly1g/edit?usp=sharing" target="_blank">Form 3</a>
+        </div>
+        <div class="google-doc-link">
+            <a href="https://docs.google.com/document/d/1uZHi-6vlXHHKr2mCQiRFIEqM8_GepT_D2WYGYNzly1g/edit?usp=sharing" target="_blank">Form 4</a>
+        </div>
+        <div class="google-doc-link">
+            <a href="https://docs.google.com/document/d/1uZHi-6vlXHHKr2mCQiRFIEqM8_GepT_D2WYGYNzly1g/edit?usp=sharing" target="_blank">Form 5</a>
+        </div>
+    </div>
+    
+
+    <script src="script.js"></script>
+
+
+    
+    <script src="app.js"></script>
+</body>
+</html>

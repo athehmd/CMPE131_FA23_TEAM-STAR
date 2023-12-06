@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City of WIlliamston</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/" id="navbar__logo" > <img src="{{ url_for('static', filename='images/image2vector.svg') }}" alt="pic" id="main__img" style="max-width: 8%; height: auto;">
+                City Of Williamston </a>
+            <div class="navbar__toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="{{ url_for('index') }}" class="navbar__links"> Home </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="{{ url_for('community') }}" class="navbar__links"> Community </a>
+                    
+                </li>
+                <li class="navbar__item">
+                    <a href="{{ url_for('news') }}" class="navbar__links"> News </a>
+                </li>
+                <li class="navbar__btn">
+                    <a href="{{ url_for('login') }}" class="button"> Log In </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+
+
+    <div class="news-section">
+        <!-- News Box 1 -->
+        <div class="news-box">
+            <h2>News Title 1</h2>
+            <p class="news-date">Insert Date</p>
+            <p class="news-content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <a href="#" class="see-more-btn">See More</a>
+        </div>
+
+        <!-- News Box 2 -->
+        <div class="news-box">
+            <h2>News Title 2</h2>
+            <p class="news-date">Insert Date</p>
+            <p class="news-content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <a href="#" class="see-more-btn">See More</a>
+        </div>
+
+          <!-- News Box 2 -->
+          <div class="news-box">
+            <h2>News Title 3</h2>
+            <p class="news-date">Insert Date</p>
+            <p class="news-content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <a href="#" class="see-more-btn">See More</a>
+        </div>
+
+          <!-- News Box 2 -->
+          <div class="news-box">
+            <h2>News Title 4</h2>
+            <p class="news-date">Insert Date</p>
+            <p class="news-content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <a href="#" class="see-more-btn">See More</a>
+        </div>
+
+
+        
+    </div>
+
+    
+
+
+    <div class="weather-section">
+        <div class="weather-container">
+            {% if weather_data %}
+                <p>Temperature: {{ weather_data['temperature'] }}°F</p>
+                <p>Description: {{ weather_data['description'] }}</p>
+                <img src="http://openweathermap.org/img/w/{{ weather_data['icon'] }}.png" alt="Weather Icon">
+            {% else %}
+                <p>Weather data not available</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
