@@ -2,8 +2,6 @@
 
 Useful Documentation:
 
-[Click](https://click.palletsprojects.com/en/8.1.x/quickstart/)
-
 [MariaDB](https://www.mariadbtutorial.com/)
 
 [HeidiSQL](https://www.heidisql.com/)
